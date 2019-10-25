@@ -285,8 +285,13 @@ func (fc *FakeDbClient) DeletePool(ctx *c.Context, polID string) error {
 
 // CreateProfile
 func (fc *FakeDbClient) CreateProfile(ctx *c.Context, prf *model.ProfileSpec) (*model.ProfileSpec, error) {
-	return &SampleProfiles[0], nil
+	if prf.StorageType == "file"{
+		return &SampleFileShareProfiles[1], nil
+	}else{
+		return &SampleProfiles[1], nil
+	}
 }
+
 
 // GetProfile
 func (fc *FakeDbClient) GetProfile(ctx *c.Context, prfID string) (*model.ProfileSpec, error) {

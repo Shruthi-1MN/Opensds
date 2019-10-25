@@ -29,7 +29,7 @@ var (
 			BaseModel: &model.BaseModel{
 				Id: "1106b972-66ef-11e7-b172-db03f3689c9c",
 			},
-			Name:             "default",
+			Name:             "default_block",
 			Description:      "default policy",
 			StorageType:      "block",
 			CustomProperties: model.CustomPropertiesSpec{},
@@ -60,7 +60,7 @@ var (
 			BaseModel: &model.BaseModel{
 				Id: "1106b972-66ef-11e7-b172-db03f3689c9c",
 			},
-			Name:             "default",
+			Name:             "default_file",
 			Description:      "default policy",
 			StorageType:      "file",
 			CustomProperties: model.CustomPropertiesSpec{},
@@ -69,8 +69,8 @@ var (
 			BaseModel: &model.BaseModel{
 				Id: "2f9c0a04-66ef-11e7-ade2-43158893e017",
 			},
-			Name:        "silver",
-			Description: "silver policy",
+			Name:        "gold",
+			Description: "gold policy",
 			StorageType: "file",
 			CustomProperties: model.CustomPropertiesSpec{
 				"dataStorage": map[string]interface{}{

@@ -546,3 +546,115 @@ func TestClientFailoverReplication(t *testing.T) {
 	t.Log("Disable volume replication not ready!")
 }
 */
+
+/*
+	File share integration test cases
+*/
+
+func TestClientCreateFileProfile(t *testing.T) {
+	var body = &model.ProfileSpec{
+		Name:        "gold",
+		Description: "gold policy",
+		StorageType: "block",
+		CustomProperties: model.CustomPropertiesSpec{
+			"diskType": "SAS",
+		},
+	}
+
+	prf, err := c.CreateProfile(body)
+	if err != nil {
+		t.Error("create profile in client failed:", err)
+		return
+	}
+	// If customized properties are not defined, create an empty one.
+	if prf.CustomProperties == nil {
+		prf.CustomProperties = model.CustomPropertiesSpec{}
+	}
+
+	var expected = &SampleFileShareProfiles[0]
+	if !reflect.DeepEqual(prf, expected) {
+		t.Errorf("expected %+v, got %+v\n", expected, prf)
+	}
+}
+
+//func TestClientGetProfile(t *testing.T) {
+//	var prfID = "2f9c0a04-66ef-11e7-ade2-43158893e017"
+//
+//	prf, err := c.GetProfile(prfID)
+//	if err != nil {
+//		t.Error("get profile in client failed:", err)
+//		return
+//	}
+//
+//	var expected = &SampleProfiles[1]
+//	if !reflect.DeepEqual(prf, expected) {
+//		t.Errorf("expected %+v, got %+v\n", expected, prf)
+//	}
+//}
+//
+//func TestClientListProfiles(t *testing.T) {
+//	prfs, err := c.ListProfiles()
+//	if err != nil {
+//		t.Error("list profiles in client failed:", err)
+//		return
+//	}
+//	// If extras are not defined, create an empty one.
+//	for _, prf := range prfs {
+//		if prf.CustomProperties == nil {
+//			prf.CustomProperties = model.CustomPropertiesSpec{}
+//		}
+//	}
+//
+//	var expected []*model.ProfileSpec
+//	for i := range SampleProfiles {
+//		expected = append(expected, &SampleProfiles[i])
+//	}
+//	if !reflect.DeepEqual(prfs, expected) {
+//		t.Errorf("expected %+v, got %+v\n", expected, prfs)
+//	}
+//}
+//
+//func TestClientAddCustomProperty(t *testing.T) {
+//	var prfID = "2f9c0a04-66ef-11e7-ade2-43158893e017"
+//	var body = &model.CustomPropertiesSpec{
+//		"diskType": "SAS",
+//	}
+//
+//	ext, err := c.AddCustomProperty(prfID, body)
+//	if err != nil {
+//		t.Error("add profile extra property in client failed:", err)
+//		return
+//	}
+//
+//	var expected = &SampleProfiles[0].CustomProperties
+//	if !reflect.DeepEqual(ext, expected) {
+//		t.Errorf("expected %+v, got %+v\n", expected, ext)
+//	}
+//}
+//
+//func TestClientListCustomProperties(t *testing.T) {
+//	var prfID = "2f9c0a04-66ef-11e7-ade2-43158893e017"
+//
+//	ext, err := c.ListCustomProperties(prfID)
+//	if err != nil {
+//		t.Error("list profile customized properties in client failed:", err)
+//		return
+//	}
+//
+//	var expected = &SampleProfiles[0].CustomProperties
+//	if !reflect.DeepEqual(ext, expected) {
+//		t.Errorf("expected %+v, got %+v\n", expected, ext)
+//	}
+//}
+//
+//func TestClientRemoveCustomProperty(t *testing.T) {
+//	var prfID = "2f9c0a04-66ef-11e7-ade2-43158893e017"
+//	var customKey = "iops"
+//
+//	if err := c.RemoveCustomProperty(prfID, customKey); err != nil {
+//		t.Error("remove profile customized property in client failed:", err)
+//		return
+//	}
+//
+//	t.Log("Remove customized property <iops> success!")
+//}
